@@ -27,12 +27,20 @@ contract("Decentragram", ([deployer, author, tipper]) => {
   });
 
   describe("images", async () => {
-    let result;
+    let result, imageCount;
+    const hash = "416dD4f24B435af5Af2Bd4465eBDF7630D701D77";
+
+    before(async () => {
+      result = await decentragram.uploadImage(hash, "Image description", {
+        from: author,
+      });
+      imageCount = await decentragram.imageCount();
+    });
 
     it("creates images", async () => {
-      result = await decentragram.uploadImage();
-      let image = await decentragram.images(1);
-      console.log(image);
+      // SUCCESS
+      assert.equal(imageCount, 1);
+      console.log(result)
     });
   });
 });
